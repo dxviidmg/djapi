@@ -1,3 +1,20 @@
+"""
+    NOTAS
+    
+    Hemos visto 4 tipos de vistas
+
+    *Vistas Django Puro
+    *Sub Clases APIView
+    *Sub Clases generics.*
+    viewsets.ModelViewSet
+
+    Así que cómo o cuándo usar cual vista.  Aunque no es ley, sólo planteo posibilidades que considero más adecuadas.
+
+    *Use viewsets.ModelViewSet cuando va a permitir todas o la mayoría de las operaciones CRUD en un modelo.
+    *Use genéricos.* Cuando solo desee permitir algunas operaciones en un modelo
+    *Usa APIView cuando quieras personalizar completamente el comportamiento
+"""
+
 #from rest_framework.views import APIView
 #from rest_framework.response import Response
 #from django.shortcuts import get_object_or_404
@@ -71,17 +88,3 @@ class ProductoViewSet(viewsets.ModelViewSet):
     queryset = Producto.objects.all()
     serializer_class = ProductoSerializer
 
-"""
-    Hemos visto 4 tipos de vistas
-
-    *Vistas Django Puro
-    *Sub Clases APIView
-    *Sub Clases generics.*
-    viewsets.ModelViewSet
-
-    Así que cómo o cuándo usar cual vista.  Aunque no es ley, sólo planteo posibilidades que considero más adecuadas.
-
-    *Use viewsets.ModelViewSet cuando va a permitir todas o la mayoría de las operaciones CRUD en un modelo.
-    *Use genéricos.* Cuando solo desee permitir algunas operaciones en un modelo
-    *Usa APIView cuando quieras personalizar completamente el comportamiento
-"""
