@@ -1,7 +1,7 @@
 from django.urls import path
 from rest_framework.routers import DefaultRouter
 
-from .apiviews import ProductoList, ProductoDetalle, CategoriaList, SubCategoriaList, CategoríaDetalle, SubCategoriaList, SubCategoriaAdd, ProductoViewSet
+from .apiviews import *
 
 router = DefaultRouter() 
 #router.register('v2/productos/', ProductoViewSet, name='productos')
@@ -14,7 +14,7 @@ urlpatterns = [
 #    path('v1/subcategorias/', SubCategoriaList.as_view(), name='subcategoria_save' ),
     path('v1/categorias/<int:pk>', CategoríaDetalle.as_view(), name='categoria_detalle' ),
     path('v1/categorias/<int:pk>/subcategorias/', SubCategoriaList.as_view(), name='sc_list'),
-    path('v1/categorias/<int:cat_pk>/addsubcategorias/', SubCategoriaAdd.as_view(), name='sc_add')
+    path('v1/categorias/<int:cat_pk>/addsubcategorias/', SubCategoriaAdd.as_view(), name='sc_add'),
+    path('v3/usuarios/', UserCreate.as_view(), name='user_create')    
 ]
-
 urlpatterns += router.urls

@@ -25,7 +25,7 @@ from rest_framework.response import Response
 from rest_framework import viewsets
 
 from .models import Producto, Categoria, SubCategoria
-from.serializers import ProductoSerializer, CategoriaSerializer, SubCategoriaSerializer
+from.serializers import *
 
 #class ProductoList(APIView):
 #    def get(self, request):
@@ -88,3 +88,7 @@ class ProductoViewSet(viewsets.ModelViewSet):
     queryset = Producto.objects.all()
     serializer_class = ProductoSerializer
 
+class UserCreate(generics.CreateAPIView):
+    authentication_classes = {}
+    permission_classes = {}
+    serializer_class = UserSerializer
