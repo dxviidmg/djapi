@@ -5,8 +5,7 @@ from rest_framework.authtoken import views
 from .apiviews import *
 
 from rest_framework_swagger.views import get_swagger_view 
-
-schema_view = get_swagger_view(title='RESTFUL API CURSO')
+from rest_framework.documentation import include_docs_urls
 
 router = DefaultRouter() 
 #router.register('v2/productos/', ProductoViewSet, name='productos')
@@ -24,8 +23,9 @@ urlpatterns = [
     path('v4/login/', LoginView.as_view(), name='login'),
     path("v4/login-drf/", views.obtain_auth_token, name="login_drf"),
     #Tiene una parte publica y privada, para acceder a la privada necesito ser superuser
-    path("swagger-docs", schema_view),
+    path("swagger-docs", get_swagger_view(title='Documentación SWAGGER')),
+    path('docs/', include_docs_urls(title='Documentación COREAPI'))
     
 ]
-schema_view
+
 urlpatterns += router.urls
