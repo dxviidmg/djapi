@@ -1,5 +1,6 @@
 from django.urls import path
 from rest_framework.routers import DefaultRouter
+from rest_framework.authtoken import views
 
 from .apiviews import *
 
@@ -15,6 +16,8 @@ urlpatterns = [
     path('v1/categorias/<int:pk>', CategoríaDetalle.as_view(), name='categoria_detalle' ),
     path('v1/categorias/<int:pk>/subcategorias/', SubCategoriaList.as_view(), name='sc_list'),
     path('v1/categorias/<int:cat_pk>/addsubcategorias/', SubCategoriaAdd.as_view(), name='sc_add'),
-    path('v3/usuarios/', UserCreate.as_view(), name='user_create')    
+    path('v3/usuarios/', UserCreate.as_view(), name='user_create'),
+    path('v4/login/', LoginView.as_view(), name='login'),
+    path("v4/login-drf/", views.obtain_auth_token, name="login_drf")
 ]
 urlpatterns += router.urls

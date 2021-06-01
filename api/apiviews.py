@@ -26,6 +26,10 @@ from rest_framework import viewsets
 
 from .models import Producto, Categoria, SubCategoria
 from.serializers import *
+from django.contrib.auth import authenticate
+
+from rest_framework.permissions import IsAuthenticated
+from .permissions import IsOwner
 
 #class ProductoList(APIView):
 #    def get(self, request):
@@ -87,8 +91,24 @@ class SubCategoriaAdd(APIView):
 class ProductoViewSet(viewsets.ModelViewSet):
     queryset = Producto.objects.all()
     serializer_class = ProductoSerializer
+    permission_classes = ([IsAuthenticated, IsOwner])
 
 class UserCreate(generics.CreateAPIView):
-    authentication_classes = {}
-    permission_classes = {}
+    authentication_classes = ()
+    permission_classes = ()
     serializer_class = UserSerializer
+
+class LoginView(APIView):
+    permission_classes = ()
+ 
+    def post(self, request,):
+        username = request.data.get('username')
+        password = request.data.get('password')
+
+        user = authenticate(username=username, password=password)
+        
+        if user:
+            return Response({"token": user.auth_token.key})
+        else:
+             Response({'Error': 'Credenciales incrrectas'}, status=status.HTTP_400_BAD_REQUEST)
+
