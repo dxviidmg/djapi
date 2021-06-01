@@ -23,7 +23,9 @@ urlpatterns = [
     path('v3/usuarios/', UserCreate.as_view(), name='user_create'),
     path('v4/login/', LoginView.as_view(), name='login'),
     path("v4/login-drf/", views.obtain_auth_token, name="login_drf"),
+    #Tiene una parte publica y privada, para acceder a la privada necesito ser superuser
     path("swagger-docs", schema_view),
+    
 ]
 schema_view
 urlpatterns += router.urls
