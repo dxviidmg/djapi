@@ -4,6 +4,10 @@ from rest_framework.authtoken import views
 
 from .apiviews import *
 
+from rest_framework_swagger.views import get_swagger_view 
+
+schema_view = get_swagger_view(title='RESTFUL API CURSO')
+
 router = DefaultRouter() 
 #router.register('v2/productos/', ProductoViewSet, name='productos')
 router.register('v2/productos', ProductoViewSet, basename='productos')
@@ -18,6 +22,8 @@ urlpatterns = [
     path('v1/categorias/<int:cat_pk>/addsubcategorias/', SubCategoriaAdd.as_view(), name='sc_add'),
     path('v3/usuarios/', UserCreate.as_view(), name='user_create'),
     path('v4/login/', LoginView.as_view(), name='login'),
-    path("v4/login-drf/", views.obtain_auth_token, name="login_drf")
+    path("v4/login-drf/", views.obtain_auth_token, name="login_drf"),
+    path("swagger-docs", schema_view),
 ]
+schema_view
 urlpatterns += router.urls
